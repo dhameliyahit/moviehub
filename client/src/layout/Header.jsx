@@ -1,18 +1,18 @@
-import React,{useState} from 'react'
-import MovieHubLogo from '../assets/MovieHubLogo.png'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import MovieHubLogo from '../assets/MovieHubLogo.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    
-    <header className="bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white p-4 shadow-lg">
+    <header className=" transition duration-300 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img src={MovieHubLogo} alt="Movie Hub Logo" className="h-10 w-10 mr-2" />
           <span className="text-xl font-bold">Movie Hub</span>
         </div>
-        <div className="hidden md:flex items-center">
+        <div className="md:flex max-md:hidden items-center">
           <input
             type="text"
             placeholder="Search..."
@@ -22,12 +22,11 @@ const Header = () => {
             Search
           </button>
         </div>
-        <div className="hidden md:flex space-x-4">
-          <Link to="/" className="hover:text-gray-300  hover:underline transition duration-300">Home</Link>
-          <Link to="/explorer" className="hover:text-gray-300 hover:underline transition duration-300">Explorer</Link>
+        <div className="md:flex max-md:hidden space-x-4">
+          <Link to="/" className="hover:text-gray-300 hover:underline transition duration-300">Home</Link>
+          <Link to="/explorer" className=" hover:text-gray-300 hover:underline transition duration-300">Explorer</Link>
           <Link to="/about" className="hover:text-gray-300 hover:underline transition duration-300">About Us</Link>
           <Link to="/rfm" className="hover:text-gray-300 hover:underline transition duration-300">Request For Movie</Link>
-          <Link to="/admin/login" className='hidden sm:block hover:text-gray-300 hover:underline transition duration-300'>Login</Link>
         </div>
         <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -35,8 +34,9 @@ const Header = () => {
           </svg>
         </button>
       </div>
+
       {isMenuOpen && (
-        <div className="md:hidden mt-4">
+        <div className="md:hidden  mt-4">
           <div className="flex flex-col items-center">
             <div className="flex items-center mb-4">
               <input
@@ -53,12 +53,13 @@ const Header = () => {
               <Link to="/explorer" className="hover:text-gray-300 transition duration-300">Explorer</Link>
               <Link to="/about" className="hover:text-gray-300 transition duration-300">About Us</Link>
               <Link to="/rfm" className="hover:text-gray-300 transition duration-300">Request For Movie</Link>
+              <Link to="/admin/login" className='hover:text-gray-300 hover:underline transition duration-300'>Login</Link>
             </nav>
           </div>
         </div>
       )}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
