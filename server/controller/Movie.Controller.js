@@ -32,11 +32,16 @@ const addMovieController = async(req,res)=>{
     }
 }
 
+// all movie route
 const AllMovieGetController = async(req,res) =>{
-    const movie = movieModel.find({}).select("-MoviePoster");
-
+    const movie = await movieModel.find({}).select("-MoviePoster");
+    
     try {
-        
+        res.status(200).send({
+            success:true,
+            message:"successfully get All Movie's",
+            movie
+        })
     } catch (error) {
         console.log(error);
         res.status(500).send({
@@ -48,11 +53,92 @@ const AllMovieGetController = async(req,res) =>{
 
 }
 
+// single movie get route
+const getSingleMovieController = async(req,res)=>{
+    const id = req.params
+    const movie = await movieModel.findById(id.id).select("-MoviePoster");
+    try {
+        res.status(200).send({
+            success:true,
+            message:"Successfully get single Movie",
+            movie 
+        })
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:"Error while Get single Movie",
+            error
+        })
+    }
+
+}
+
+// get movie poster route
+const getMoviePosterController = async(req,res)=>{
+    const pid = req.params;
+    const poster = await movieModel.find(pid.id).select("MoviePoster");
+
+    try {
+        res.status(200).send({
+            success:true,
+            message:"Movie Poster Get Successfully ",
+            poster
+        })
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:"Error while getting Movie Poster",
+            error
+        })
+    }
+}  
+
+const UpdateMovieController = async(req,res)=>{
+    const uid = req.params;
+    const updatedMovie = await movieModel.findByIdAndUpdate(uid.uid,req.body);
+
+    try {
+        res.status(200).send({
+            success:true,
+            message:"Successfully Movie Updated!",
+            updatedMovie
+        })
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:"Error while update Movie",
+            error
+        })
+    }
+} 
+
+const deleteMovieController = async(req,res)=>{
+    const id = req.params;
+    const movie = await movieModel.findByIdAndDelete(id.id);
+
+    try {
+        res.status(200).send({
+            success:true,
+            message:"Movie Delete Successfully",
+            movie
+        });
+    } catch (error) {
+        res.status(500).send({
+            success:false,
+            message:"Error while Movie Delete",
+            error
+        });
+    }
+}
 
 
 module.exports = {
     addMovieController,
-    AllMovieGetController
+    AllMovieGetController,
+    getSingleMovieController,
+    getMoviePosterController,
+    UpdateMovieController,
+    deleteMovieController
 }
 
 
