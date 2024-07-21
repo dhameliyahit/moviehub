@@ -8,10 +8,12 @@ const Header = () => {
   return (
     <header className=" transition duration-300 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <img src={MovieHubLogo} alt="Movie Hub Logo" className="h-10 w-10 mr-2" />
-          <span className="text-xl font-bold">Movie Hub</span>
-        </div>
+          <Link to={"/"}>
+          <div className="flex items-center">
+            <img src={MovieHubLogo} alt="Movie Hub Logo" className="h-10 w-10 mr-2" />
+            <span className="text-xl font-bold">Movie Hub</span>
+          </div>
+          </Link>
         <div className="md:flex max-md:hidden items-center">
           <input
             type="text"
@@ -53,7 +55,6 @@ const Header = () => {
               <Link to="/explorer" className="hover:text-gray-300 transition duration-300">Explorer</Link>
               <Link to="/about" className="hover:text-gray-300 transition duration-300">About Us</Link>
               <Link to="/rfm" className="hover:text-gray-300 transition duration-300">Request For Movie</Link>
-              <Link to="/admin/login" className='hover:text-gray-300 hover:underline transition duration-300'>Login</Link>
             </nav>
           </div>
         </div>

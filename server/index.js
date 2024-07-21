@@ -3,10 +3,9 @@ const express = require("express");
 const cros = require("cors")
 const connectDB = require("./config/connectdb.js")
 const MovieRoute = require("./route/Movie.Route.js")
-
+const morgan = require("morgan");
 
 const PORT = process.env.PORT || 8000;
-
 const DB_URL = process.env.DB_URL 
 connectDB(DB_URL)
 const app = express();
@@ -14,6 +13,7 @@ const app = express();
 // middleware's
 app.use(express.json())
 app.use(cros())
+app.use(morgan())
 
 // home route
 app.get("/",(req,res)=>{

@@ -20,6 +20,6 @@ router.get("/movie/poster/:pid",getMoviePosterController);
 router.patch("/movie/update/:uid",UpdateMovieController);
 
 // delete movie Route
-router.delete("/movie/delete/:id",deleteMovieController)
+router.delete("/movie/delete/:id",deleteMovieController);
 
 module.exports = router
