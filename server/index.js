@@ -1,9 +1,11 @@
 require("dotenv").config();
 const express = require("express");
-const cros = require("cors")
-const connectDB = require("./config/connectdb.js")
-const MovieRoute = require("./route/Movie.Route.js")
+const cros = require("cors");
+const connectDB = require("./config/connectdb.js");
+const MovieRoute = require("./route/Movie.Route.js");
+const UserRoute = require("./route/User.Route.js");
 const morgan = require("morgan");
+
 
 const PORT = process.env.PORT || 8000;
 const DB_URL = process.env.DB_URL 
@@ -21,8 +23,10 @@ app.get("/",(req,res)=>{
 })
 
 // api's
+// ->for movie
 app.use("/api/v1",MovieRoute)
-
+// ->for user(admin's)
+app.use("/api/v1/admin",UserRoute)
 
 
 
