@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const cros = require("cors");
+const cors = require("cors");
 const connectDB = require("./config/connectdb.js");
 const MovieRoute = require("./route/Movie.Route.js");
 const UserRoute = require("./route/User.Route.js");
@@ -14,7 +14,7 @@ const app = express();
 
 // middleware's
 app.use(express.json())
-app.use(cros())
+app.use(cors())
 app.use(morgan())
 
 // home route

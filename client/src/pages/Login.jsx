@@ -28,7 +28,7 @@ const Login = () => {
         if (userName.toLowerCase() == p.userName.toLowerCase() && email.toLowerCase() == p.email.toLowerCase() && Password.toLocaleLowerCase() == p.Password.toLowerCase()) {
           if(p.role == 0){
               toast(`Wellcome Back ${userName}`)
-              navigate("/admin/user")
+              navigate(`/admin/user/${userName}`)
           }else if(p.role == 1){
             toast.success("Wellcome main admin");
           }

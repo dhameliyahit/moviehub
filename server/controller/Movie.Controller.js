@@ -6,8 +6,12 @@ const fs = require("fs")
 const addMovieController = async(req,res)=>{
     const {MovieName,MovieDesc,imdb,link480p,link720p} = req.fields;
     const {MoviePoster} = req.files;
-    const movie = movieModel({
-        MovieName,MovieDesc,imdb,link480p,link720p,MoviePoster
+    const movie =new movieModel({
+        MovieName,
+        MovieDesc,
+        imdb,
+        link480p,
+        link720p 
     })
     
     if(MoviePoster){
@@ -15,9 +19,9 @@ const addMovieController = async(req,res)=>{
         movie.MoviePoster.contentType = MoviePoster.type
     }
 
-    await movie.save()
-
+    
     try {
+        await movie.save()
         res.status(200).send({
             success:true,
             message:"Movie Add successfully",
@@ -80,8 +84,6 @@ const getMoviePosterController = async(req,res)=>{
 
     try {
         res.status(200).send({
-            success:true,
-            message:"Movie Poster Get Successfully ",
             poster
         })
     } catch (error) {
