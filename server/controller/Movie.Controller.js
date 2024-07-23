@@ -1,3 +1,4 @@
+const { error } = require("console");
 const movieModel = require("../model/MovieModel.js");
 const fs = require("fs")
 
@@ -13,7 +14,10 @@ const addMovieController = async(req,res)=>{
         link480p,
         link720p 
     })
-    
+
+    if(MoviePoster >=100000){
+        res.send("Poster must be less than 1MB")
+    }
     if(MoviePoster){
         movie.MoviePoster.data = fs.readFileSync(MoviePoster.path)
         movie.MoviePoster.contentType = MoviePoster.type
@@ -79,20 +83,27 @@ const getSingleMovieController = async(req,res)=>{
 
 // get movie poster route
 const getMoviePosterController = async(req,res)=>{
-    const pid = req.params;
-    const poster = await movieModel.find(pid.id).select("MoviePoster");
-
     try {
-        res.status(200).send({
-            poster
-        })
+        const pid = req.params;
+        const poster = await movieModel.findById(pid.pid).select("MoviePoster");
+        if (poster && poster.MoviePoster && poster.MoviePoster.data) {
+            res.set('Content-Type', poster.MoviePoster.contentType); // Set content type
+            return res.status(200).send(poster.MoviePoster.data); // Send the image data
+        } else {
+            return res.status(404).send({
+              success: false,
+              message: "Movie Poster not found",
+            });
+        }
+        
     } catch (error) {
-        res.status(500).send({
-            success:false,
-            message:"Error while getting Movie Poster",
-            error
-        })
+        console.error(error);
+        return res.status(500).send({
+          success: false,
+          message: "Error while fetching Movie Poster",
+        });
     }
+
 }  
 
 const UpdateMovieController = async(req,res)=>{
